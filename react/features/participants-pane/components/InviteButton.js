@@ -1,12 +1,10 @@
 // @flow
 
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 
-import { createToolbarEvent, sendAnalytics } from '../../analytics';
 import { Icon, IconInviteMore } from '../../base/icons';
-import { beginAddPeople } from '../../invite';
 
 import { ParticipantInviteButton } from './styled';
 
@@ -14,15 +12,12 @@ export const InviteButton = () => {
     const dispatch = useDispatch();
     const { t } = useTranslation();
 
-    const onInvite = useCallback(() => {
-        sendAnalytics(createToolbarEvent('invite'));
-        dispatch(beginAddPeople());
-    }, [ dispatch ]);
+    const openInvite = () => window.open(window.pyromaniaInviteUrl, '_blank')
 
     return (
         <ParticipantInviteButton
             aria-label = { t('toolbar.accessibilityLabel.invite') }
-            onClick = { onInvite }>
+            onClick = { openInvite }>
             <Icon
                 size = { 20 }
                 src = { IconInviteMore } />
